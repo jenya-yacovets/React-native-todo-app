@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
-import { View, StyleSheet, TextInput, Button } from 'react-native'
+import { View, StyleSheet, TextInput, Button, Alert } from 'react-native'
 
 const AddTodo = ({ addTodo }) => {
 
     const [value, setValue] = useState('')
 
     const pressHandler = () => {
-        if (!value.trim()) return
+        if (!value.trim()) {
+            Alert.alert('Нельзя создать пустое название задачи')
+            return
+        }
         addTodo(value)
         setValue('')
     }
@@ -18,6 +21,8 @@ const AddTodo = ({ addTodo }) => {
             value={ value }
             onChangeText={ text => setValue(text) }
             placeholder='Введите название задачи...'
+            autoCorrect={false}
+            autoCapitalize='sentences'
             />
             <Button onPress={ pressHandler } style={styels.button} title='Добавить' />
         </View>
