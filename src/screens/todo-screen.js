@@ -3,7 +3,8 @@ import { View, StyleSheet, Text, Button } from 'react-native'
 import AppCard from '../components/ui/app-card'
 import THEME from '../theme'
 
-const ScreenTodo = ({ closeTodo, todo: { title } }) => {
+const ScreenTodo = ({ closeTodo, removeTodo, todo: { id, title } }) => {
+
     return(
         <View>
             <AppCard style={styles.card}>
@@ -12,10 +13,10 @@ const ScreenTodo = ({ closeTodo, todo: { title } }) => {
             </AppCard>
             <View style={styles.buttons}>
                 <View style={styles.buttonBlock}>
-                    <Button onPress={() => {closeTodo(null)}} color={THEME.DANGER_COLOR} title='< назад'/>
+                    <Button onPress={() => {closeTodo(null)}} color={THEME.GREY_COLOR} title='< назад'/>
                 </View>
                 <View style={styles.buttonBlock}>
-                    <Button onPress={() => {}} color={THEME.GREY_COLOR} title='удалить'/>
+                    <Button onPress={() => removeTodo(id)} color={THEME.DANGER_COLOR} title='удалить'/>
                 </View>
             </View>
         </View>
