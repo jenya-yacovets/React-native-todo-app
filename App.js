@@ -5,8 +5,11 @@ import ScreenMain from './src/screens/main-screen';
 import ScreenTodo from './src/screens/todo-screen';
 
 export default function App() {
-  const [todoId, setTodoId] = useState(null)
-  const [todos, setTodos] = useState([])
+  const [todoId, setTodoId] = useState('1')
+  const [todos, setTodos] = useState([{
+    id: '1',
+    title: 'Покормить кота'
+  }])
 
   const addTodo = (title) => {
 
@@ -36,8 +39,11 @@ export default function App() {
                 />
 
   if (todoId) {
+    const todo = todos.find(item => item.id === todoId)
+
     content = <ScreenTodo 
               closeTodo={setTodoId} 
+              todo={todo}
               />
   }
 
