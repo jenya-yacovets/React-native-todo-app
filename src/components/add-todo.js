@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { View, StyleSheet, TextInput, Button, Alert } from 'react-native'
 
-const AddTodo = ({ addTodo }) => {
+const AddTodo = ({ onAddTodo }) => {
 
     const [value, setValue] = useState('')
 
@@ -10,7 +10,7 @@ const AddTodo = ({ addTodo }) => {
             Alert.alert('Нельзя создать пустое название задачи')
             return
         }
-        addTodo(value)
+        onAddTodo(value)
         setValue('')
     }
 
