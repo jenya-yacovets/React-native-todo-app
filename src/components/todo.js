@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, StyleSheet, TouchableOpacity } from 'react-native'
-import TextApp from './ui/app-text'
+import AppText from './ui/app-text'
 
 const Todo = ({todo: { title, id }, onRemove, onOpen}) => {
 
@@ -11,7 +11,7 @@ const Todo = ({todo: { title, id }, onRemove, onOpen}) => {
         onPress={() => onOpen(id)}
         >
             <View style={ styles.todo }>
-                <TextApp>{ title }</TextApp>
+                <AppText>{ title }</AppText>
             </View>
         </TouchableOpacity>
     )

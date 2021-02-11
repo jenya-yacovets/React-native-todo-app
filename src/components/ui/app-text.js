@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, StyleSheet } from 'react-native'
 
-const TextApp = (props) => {
+const AppText = (props) => {
     return <Text style={ {...styles.regular, ...props.style }}>{ props.children }</Text>
 }
 
@@ -25,10 +25,10 @@ const styles = StyleSheet.create({
     }
 })
 
-export default TextApp
+export default AppText
 
 export {
-    TextApp,
+    AppText,
     TextBold,
     TextLigth
 }
