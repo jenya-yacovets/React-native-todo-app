@@ -1,12 +1,25 @@
-import React, { useState } from 'react';
-import { Alert, StyleSheet, View } from 'react-native';
+import React, { useState } from 'react'
+import { Alert, StyleSheet, View, Text } from 'react-native'
+import AppLoading from 'expo-app-loading';
+import { useFonts } from 'expo-font';
+
 import NavBar from './src/components/nav-bar'
-import ScreenMain from './src/screens/main-screen';
+import ScreenMain from './src/screens/main-screen'
 import ScreenTodo from './src/screens/todo-screen';
 
 export default function App() {
+
+    const [fontsLoaded] = useFonts({
+        montserratRegular: require('./assets/fonts/Montserrat-Regular.ttf'),
+        montserratBold: require('./assets/fonts/Montserrat-Bold.ttf'),
+        montserratExtraLight: require('./assets/fonts/Montserrat-ExtraLight.ttf')
+    })
     const [todoId, setTodoId] = useState(null)
     const [todos, setTodos] = useState([])
+
+    if (!fontsLoaded) {
+        return <AppLoading />;
+    }
 
     const addTodo = (title) => {
 
@@ -46,11 +59,11 @@ export default function App() {
                 text: 'Отмена',
                 style: 'cancel'
             }],
-            {cancelable: false}
+            { cancelable: false }
         )
     }
 
-    const editTodo = ({id, title}) => {
+    const editTodo = ({ id, title }) => {
         setTodos(old => old.map(item => {
             if (item.id === id) {
                 item.title = title
