@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { View, StyleSheet, Text, Button } from 'react-native'
+import { View, StyleSheet, Button } from 'react-native'
 import EditModal from '../components/edit-modal'
 import AppCard from '../components/ui/app-card'
+import { TextBold } from '../components/ui/app-text'
 import THEME from '../theme'
 
 const ScreenTodo = ({ editTodo, closeTodo, removeTodo, todo: { id, title } }) => {
@@ -27,7 +28,7 @@ const ScreenTodo = ({ editTodo, closeTodo, removeTodo, todo: { id, title } }) =>
             />
 
             <AppCard style={styles.card}>
-                <Text style={styles.titleText}>{title}</Text>
+                <TextBold style={styles.titleText}>{title}</TextBold>
                 <Button 
                 title='Ред.'
                 onPress={() => { setModal(true) }}
