@@ -1,11 +1,16 @@
 import React from 'react'
-import { View, Text, StyleSheet} from 'react-native'
+import { View, StyleSheet, Platform } from 'react-native'
 import THEME from '../theme'
+import { TextBold } from './ui/app-text'
 
-const Navbar = (props) => {
+const Navbar = () => {
+
     return (
-        <View style={styels.navBar}>
-            <Text style={styels.text}>Todo App</Text>
+        <View style={{ ...styels.navBar, ...Platform.select({
+            ios: styels.navBarIos,
+            android: styels.navBarAndroid
+        }) }}>
+            <TextBold style={styels.text}>Todo App</TextBold>
         </View>
     )
 }
@@ -15,12 +20,18 @@ const styels = StyleSheet.create({
         height: 60,
         alignItems: 'center',
         justifyContent: 'flex-end',
-        backgroundColor: THEME.MAIN_COLOR,
         paddingBottom: 10
 
     },
+    navBarAndroid: {
+        backgroundColor: THEME.MAIN_COLOR,
+    },
+    navBarIos: {
+        borderBottomColor: THEME.MAIN_COLOR,
+        borderBottomWidth: 1
+    },
     text: {
-        color: 'white',
+        color: Platform.OS === 'ios' ? THEME.MAIN_COLOR : '#fff',
         fontSize: 20
     }
 })

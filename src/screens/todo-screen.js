@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
-import { View, StyleSheet, Text, Button } from 'react-native'
+import { View, StyleSheet, Dimensions } from 'react-native'
+import { FontAwesome, AntDesign } from '@expo/vector-icons'
+
 import EditModal from '../components/edit-modal'
+import AppButton from '../components/ui/app-button'
 import AppCard from '../components/ui/app-card'
+import { TextBold } from '../components/ui/app-text'
 import THEME from '../theme'
 
 const ScreenTodo = ({ editTodo, closeTodo, removeTodo, todo: { id, title } }) => {
-
     const [modal, setModal] = useState(false)
 
     const onEdit = (value) => {
@@ -27,18 +30,21 @@ const ScreenTodo = ({ editTodo, closeTodo, removeTodo, todo: { id, title } }) =>
             />
 
             <AppCard style={styles.card}>
-                <Text style={styles.titleText}>{title}</Text>
-                <Button 
-                title='Ред.'
-                onPress={() => { setModal(true) }}
-                />
+                <TextBold style={styles.titleText}>{title}</TextBold>
+                <AppButton onPress={() => { setModal(true) }}>
+                    <FontAwesome name="edit" size={20} color="#fff" />
+                </AppButton>
             </AppCard>
             <View style={styles.buttons}>
                 <View style={styles.buttonBlock}>
-                    <Button onPress={() => {closeTodo(null)}} color={THEME.GREY_COLOR} title='< назад'/>
+                    <AppButton onPress={() => {closeTodo(null)}} color={THEME.GREY_COLOR}>
+                        <AntDesign name="back" size={18} color="#fff" />  Назад
+                    </AppButton>
                 </View>
                 <View style={styles.buttonBlock}>
-                    <Button onPress={() => removeTodo(id)} color={THEME.DANGER_COLOR} title='удалить'/>
+                <AppButton onPress={() => removeTodo(id)} color={THEME.DANGER_COLOR}>
+                    <AntDesign name="delete" size={18} color="#fff" />  Удалить
+                </AppButton>
                 </View>
             </View>
         </View>
@@ -51,7 +57,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     buttonBlock: {
-        width: '49%'
+        width: Dimensions.get('window').width / 2 - 20
     },
     titleText: {
         fontSize: 30

@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
-import { View, StyleSheet, Modal, TextInput, Button } from 'react-native'
+import { View, StyleSheet, Modal, TextInput } from 'react-native'
+import { AntDesign, FontAwesome } from '@expo/vector-icons'
+
 import THEME from '../theme'
+import AppButton from './ui/app-button'
 
 const EditModal = ({ title, visible, onCancel, editTodo }) => {
 
@@ -19,15 +22,12 @@ const EditModal = ({ title, visible, onCancel, editTodo }) => {
                 onChangeText={setValue}
                 />
                 <View style={styles.buttons}>
-                    <Button 
-                    title='Закрыть'
-                    onPress={ onCancel }
-                    color={ THEME.DANGER_COLOR }
-                    />
-                    <Button 
-                    title='Сохранить'
-                    onPress={() => { editTodo(value) }}
-                    />
+                    <AppButton onPress={ onCancel } color={ THEME.DANGER_COLOR }>
+                    <AntDesign name="close" size={18} color="#fff" />  Закрыть
+                    </AppButton>
+                    <AppButton onPress={() => { editTodo(value) }}>
+                    <FontAwesome name="save" size={18} color="#fff" />  Сохранить
+                    </AppButton>
                 </View>
             </View>
         </Modal>
