@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, Dimensions } from 'react-native'
 import { FontAwesome, AntDesign } from '@expo/vector-icons'
 
 import EditModal from '../components/edit-modal'
@@ -9,7 +9,6 @@ import { TextBold } from '../components/ui/app-text'
 import THEME from '../theme'
 
 const ScreenTodo = ({ editTodo, closeTodo, removeTodo, todo: { id, title } }) => {
-
     const [modal, setModal] = useState(false)
 
     const onEdit = (value) => {
@@ -58,7 +57,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     buttonBlock: {
-        width: '49%'
+        width: Dimensions.get('window').width / 2 - 20
     },
     titleText: {
         fontSize: 30
