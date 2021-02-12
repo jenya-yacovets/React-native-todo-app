@@ -1,5 +1,6 @@
 import React from 'react'
 import { TouchableOpacity, TouchableNativeFeedback, View, StyleSheet, Platform } from 'react-native'
+
 import THEME from '../../theme'
 import AppText from './app-text'
 

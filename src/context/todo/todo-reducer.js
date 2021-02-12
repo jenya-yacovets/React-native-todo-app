@@ -3,15 +3,15 @@ import { ADD_TODO, REMOVE_TODO, UPDATE_TODO } from "../types"
 const handlers = {
     [ADD_TODO]: (state, { title }) => ({
         ...state, todos: [
-            ...state.todos,
             {
                 id: Date.now().toString(),
                 title
-            }
+            },
+            ...state.todos
         ]
     }),
     [REMOVE_TODO]: (state, { id }) => ({
-        ...states,
+        ...state,
         todos: state.todos.filter(item => item.id !== id)
     }),
     [UPDATE_TODO]: (state, { id, title }) => ({

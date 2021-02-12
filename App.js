@@ -1,9 +1,10 @@
 import React from 'react'
-import AppLoading from 'expo-app-loading';
-import { useFonts } from 'expo-font';
+import AppLoading from 'expo-app-loading'
+import { useFonts } from 'expo-font'
 
-import TodoState from './src/context/todo/todo-state';
-import MainLayout from './src/main-layout';
+import TodoState from './src/context/todo/todo-state'
+import MainLayout from './src/main-layout'
+import ScreenState from './src/context/screen/screen-state'
 
 export default function App() {
 
@@ -15,12 +16,14 @@ export default function App() {
 
 
     if (!fontsLoaded) {
-        return <AppLoading />;
+        return <AppLoading />
     }
 
     return (
-        <TodoState>
-            <MainLayout />
-        </TodoState>
-    );
+        <ScreenState>
+            <TodoState>
+                <MainLayout />
+            </TodoState>
+        </ScreenState>
+    )
 }

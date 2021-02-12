@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, StyleSheet, Platform } from 'react-native'
+
 import THEME from '../theme'
 import { TextBold } from './ui/app-text'
 
