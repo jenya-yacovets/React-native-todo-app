@@ -37,9 +37,9 @@ const TodoState = ({ children }) => {
             })
         })
 
-        const { id } = await res.json()
+        const { name } = await res.json()
 
-        dispatch({ type: ADD_TODO, title, id })
+        dispatch({ type: ADD_TODO, title, id: name })
     }
 
     const removeTodo = id => {
@@ -98,7 +98,7 @@ const TodoState = ({ children }) => {
         clearError()
 
         try {
-            const res = await fetch(`https://react-native-todo-app-yd-default-rtdb.firebaseio.com/todos/${id}.json`, {
+            await fetch(`https://react-native-todo-app-yd-default-rtdb.firebaseio.com/todos/${id}.json`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
