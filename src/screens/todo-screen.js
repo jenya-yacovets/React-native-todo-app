@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { View, StyleSheet, Dimensions } from 'react-native'
 import { FontAwesome, AntDesign } from '@expo/vector-icons'
 
@@ -7,13 +7,21 @@ import AppButton from '../components/ui/app-button'
 import AppCard from '../components/ui/app-card'
 import { TextBold } from '../components/ui/app-text'
 import THEME from '../theme'
+import TodoContext from '../context/todo/todo-context'
+import ScreenContext from '../context/screen/screen-context'
 
-const ScreenTodo = ({ editTodo, closeTodo, removeTodo, todo: { id, title } }) => {
+const ScreenTodo = () => {
+    
+    const { updateTodo, removeTodo, todos } = useContext(TodoContext)
+    const { screen, updateScreen } = useContext(ScreenContext)
+
+    const { id, title } = todos.find(item => item.id === screen)
+
     const [modal, setModal] = useState(false)
 
     const onEdit = (value) => {
 
-        editTodo({
+        updateTodo({
             id,
             title: value
         })
@@ -26,7 +34,7 @@ const ScreenTodo = ({ editTodo, closeTodo, removeTodo, todo: { id, title } }) =>
             visible={modal} 
             onCancel={() => { setModal(false) }} 
             title={ title }
-            editTodo={ onEdit }
+            onEdit={ onEdit }
             />
 
             <AppCard style={styles.card}>
@@ -37,7 +45,7 @@ const ScreenTodo = ({ editTodo, closeTodo, removeTodo, todo: { id, title } }) =>
             </AppCard>
             <View style={styles.buttons}>
                 <View style={styles.buttonBlock}>
-                    <AppButton onPress={() => {closeTodo(null)}} color={THEME.GREY_COLOR}>
+                    <AppButton onPress={() => {updateScreen(null)}} color={THEME.GREY_COLOR}>
                         <AntDesign name="back" size={18} color="#fff" />  Назад
                     </AppButton>
                 </View>
