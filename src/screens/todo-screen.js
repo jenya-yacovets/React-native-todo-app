@@ -19,9 +19,9 @@ const ScreenTodo = () => {
 
     const [modal, setModal] = useState(false)
 
-    const onEdit = (value) => {
+    const onEdit = async (value) => {
 
-        updateTodo({
+        await updateTodo({
             id,
             title: value
         })
