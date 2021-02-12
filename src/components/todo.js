@@ -1,14 +1,18 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { View, StyleSheet, TouchableOpacity } from 'react-native'
+
+import ScreenContext from '../context/screen/screen-context'
 import AppText from './ui/app-text'
 
-const Todo = ({todo: { title, id }, onRemove, onOpen}) => {
+const Todo = ({todo: { title, id }, onRemove}) => {
+
+    const { updateScreen } = useContext(ScreenContext)
 
     return(
         <TouchableOpacity 
         activeOpacity={ 0.5 } 
         onLongPress={ () => onRemove(id)}
-        onPress={() => onOpen(id)}
+        onPress={() => updateScreen(id)}
         >
             <View style={ styles.todo }>
                 <AppText>{ title }</AppText>

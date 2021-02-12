@@ -1,16 +1,20 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { View, StyleSheet, FlatList, Image } from 'react-native'
+
 import AddTodo from '../components/add-todo'
 import Todo from '../components/todo'
+import TodoContext from '../context/todo/todo-context'
 
-const ScreenMain = ({ addTodo, removeTodo, openTodo, todos }) => {
+const ScreenMain = () => {
+
+    const { todos, addTodo, removeTodo } = useContext(TodoContext)
+
     let content = <FlatList
         keyExtractor={item => item.id}
         data={todos}
         renderItem={({ item }) => <Todo
             todo={item}
             onRemove={removeTodo}
-            onOpen={openTodo}
         />}
     />
 

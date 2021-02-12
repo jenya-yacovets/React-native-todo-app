@@ -5,10 +5,15 @@ import { AntDesign, FontAwesome } from '@expo/vector-icons'
 import THEME from '../theme'
 import AppButton from './ui/app-button'
 
-const EditModal = ({ title, visible, onCancel, editTodo }) => {
+const EditModal = ({ title, visible, onCancel, onEdit }) => {
 
     const [value, setValue] = useState(title)
 
+    const onClose = () => {
+        onCancel()
+        setValue(title)
+    }
+    
     return(
         <Modal
         visible={visible}
@@ -22,10 +27,10 @@ const EditModal = ({ title, visible, onCancel, editTodo }) => {
                 onChangeText={setValue}
                 />
                 <View style={styles.buttons}>
-                    <AppButton onPress={ onCancel } color={ THEME.DANGER_COLOR }>
+                    <AppButton onPress={ onClose } color={ THEME.DANGER_COLOR }>
                     <AntDesign name="close" size={18} color="#fff" />  Закрыть
                     </AppButton>
-                    <AppButton onPress={() => { editTodo(value) }}>
+                    <AppButton onPress={() => { onEdit(value) }}>
                     <FontAwesome name="save" size={18} color="#fff" />  Сохранить
                     </AppButton>
                 </View>
