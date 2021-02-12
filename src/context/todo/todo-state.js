@@ -1,6 +1,7 @@
 import React, { useReducer, useContext } from 'react'
 import { Alert } from 'react-native'
 
+import ApiServises from '../../servises/api_servises'
 import ScreenContext from '../screen/screen-context'
 import {
     ADD_TODO,
@@ -54,13 +55,7 @@ const TodoState = ({ children }) => {
                 style: 'destructive',
                 onPress: async () => {
                     updateScreen(null)
-
-                    await fetch(`https://react-native-todo-app-yd-default-rtdb.firebaseio.com/todos/${id}.json`, {
-                        method: 'DELETE',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    })
+                    await ApiServises.delete({ id })
                     dispatch({ type: REMOVE_TODO, id })
                 },
             }, {
@@ -75,14 +70,7 @@ const TodoState = ({ children }) => {
         showLoader()
         clearError()
         try {
-            const res = await fetch(`https://react-native-todo-app-yd-default-rtdb.firebaseio.com/todos.json`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-
-            const data = await res.json()
+            const data = await ApiServises.get()
             const todos = Object.keys(data).map(key => ({ ...data[key], id: key }))
             dispatch({ type: FETCH_TODOS, todos })
         } catch (error) {
@@ -98,16 +86,7 @@ const TodoState = ({ children }) => {
         clearError()
 
         try {
-            await fetch(`https://react-native-todo-app-yd-default-rtdb.firebaseio.com/todos/${id}.json`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    title
-                })
-            })
-
+            await ApiServises.update({ id, title })
             dispatch({ type: UPDATE_TODO, id, title })
         } catch (error) {
             showError(error)
