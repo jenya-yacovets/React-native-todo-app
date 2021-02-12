@@ -7,60 +7,61 @@ import ScreenMain from './screens/main-screen'
 import ScreenTodo from './screens/todo-screen';
 
 const MainLayout = () => {
-    const todosContext = useContext(TodoContext)
+    const { todos, addTodo, removeTodo, updateTodo } = useContext(TodoContext)
     const [todoId, setTodoId] = useState(null)
-    const [todos, setTodos] = useState([])
 
-    const addTodo = (title) => {
+    // const [todos, setTodos] = useState([])
 
-        const newTodo = {
-            id: Date.now().toString(),
-            title
-        }
-        setTodos((state) => [newTodo, ...state])
-    }
+    // const addTodo = (title) => {
 
-    const removeTodo = id => {
+    //     const newTodo = {
+    //         id: Date.now().toString(),
+    //         title
+    //     }
+    //     setTodos((state) => [newTodo, ...state])
+    // }
 
-        const { title } = todos.find(item => item.id === id)
+    // const removeTodo = id => {
 
-        Alert.alert(
-            'Удалить задачу',
-            `Вы действительно хотите удалить задачу "${title}"?`,
-            [{
-                text: 'Удалить',
-                style: 'destructive',
-                onPress: () => {
+    //     const { title } = todos.find(item => item.id === id)
 
-                    if (todoId === id) {
-                        setTodoId(null)
-                    }
+    //     Alert.alert(
+    //         'Удалить задачу',
+    //         `Вы действительно хотите удалить задачу "${title}"?`,
+    //         [{
+    //             text: 'Удалить',
+    //             style: 'destructive',
+    //             onPress: () => {
 
-                    setTodos(state => {
+    //                 if (todoId === id) {
+    //                     setTodoId(null)
+    //                 }
 
-                        const newState = state.filter(todo => {
-                            if (todo.id != id) return true
-                        })
+    //                 setTodos(state => {
 
-                        return [...newState]
-                    })
-                },
-            }, {
-                text: 'Отмена',
-                style: 'cancel'
-            }],
-            { cancelable: false }
-        )
-    }
+    //                     const newState = state.filter(todo => {
+    //                         if (todo.id != id) return true
+    //                     })
 
-    const editTodo = ({ id, title }) => {
-        setTodos(old => old.map(item => {
-            if (item.id === id) {
-                item.title = title
-            }
-            return item
-        }))
-    }
+    //                     return [...newState]
+    //                 })
+    //             },
+    //         }, {
+    //             text: 'Отмена',
+    //             style: 'cancel'
+    //         }],
+    //         { cancelable: false }
+    //     )
+    // }
+
+    // const editTodo = ({ id, title }) => {
+    //     setTodos(old => old.map(item => {
+    //         if (item.id === id) {
+    //             item.title = title
+    //         }
+    //         return item
+    //     }))
+    // }
 
     let content = <ScreenMain
         addTodo={addTodo}
@@ -76,8 +77,8 @@ const MainLayout = () => {
             closeTodo={setTodoId}
             todo={todo}
             removeTodo={removeTodo}
-            editTodo={editTodo}
-        />
+            editTodo={updateTodo}
+        /> 
     }
 
     return (
