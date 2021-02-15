@@ -11,7 +11,7 @@ const MainLayout = () => {
     const { screen } = useContext(ScreenContext)
 
     return (
-        <View>
+        <View style={ styles.main }>
             <NavBar />
             <View style={styles.container}>
                 {screen ? <ScreenTodo /> : <ScreenMain />}
@@ -23,7 +23,11 @@ const MainLayout = () => {
 const styles = StyleSheet.create({
     container: {
         paddingHorizontal: 15,
-        paddingVertical: 10
+        paddingVertical: 10,
+        flex: 1
+    },
+    main: {
+        flex: 1
     }
 })
 

@@ -1,13 +1,42 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useCallback } from 'react'
 import { View, StyleSheet, FlatList, Image } from 'react-native'
+import { AntDesign, MaterialIcons } from '@expo/vector-icons'
 
 import AddTodo from '../components/add-todo'
 import Todo from '../components/todo'
+import AppButton from '../components/ui/app-button'
+import AppText from '../components/ui/app-text'
+import Loader from '../components/ui/loader'
 import TodoContext from '../context/todo/todo-context'
+import THEME from '../theme'
 
 const ScreenMain = () => {
 
-    const { todos, addTodo, removeTodo } = useContext(TodoContext)
+    const { todos, addTodo, removeTodo, fetchTodos, loading, error } = useContext(TodoContext)
+
+
+    const loadTodos = useCallback(async () => await fetchTodos(), [fetchTodos])
+
+    useEffect(() => {
+        loadTodos()
+    }, [])
+
+    if (error) {
+        return (
+            <View style={styles.error}>
+                <AppText style={styles.textError}>
+                    <MaterialIcons name="error-outline" size={23} color={THEME.DANGER_COLOR} />  {error}</AppText>
+                <AppButton onPress={loadTodos}>
+                    <AntDesign name="reload1" size={18} color="#fff" />  Повторить попытку
+                </AppButton>
+            </View>
+        )
+    }
+
+
+    if (loading) {
+        return <Loader />
+    }
 
     let content = <FlatList
         keyExtractor={item => item.id}
@@ -45,6 +74,17 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         resizeMode: 'contain'
+    },
+    error: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    textError: {
+        fontSize: 24,
+        color: THEME.DANGER_COLOR,
+        textAlign: 'center',
+        marginBottom: 10
     }
 })
 
